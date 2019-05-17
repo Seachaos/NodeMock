@@ -2,6 +2,11 @@ import fs from 'fs';
 
 const FILE_CACHE = {};
 
+/*
+load data from file
+  name : file name
+  default_value : if file not exists, will be default value
+*/
 export const load_from_file = (name, default_value) => {
   fs.readFile(`./data/${name}`, 'utf8', function(err, contents) {
     if (contents) {
@@ -16,6 +21,12 @@ export const load_from_file = (name, default_value) => {
   }
 }
 
+/*
+save data to file
+  name : file name
+  reduce : a function will be call when resource call.
+           function like : (currently_data, {req, res}) => [new_data, response data]
+*/
 export const save_to_file = (name, reduce) => {
   const save_data = (content) => {
     fs.writeFile(`./data/${name}`, JSON.stringify(content), function(err) {
@@ -31,10 +42,4 @@ export const save_to_file = (name, reduce) => {
     save_data(content);
     return response;
   }
-
-}
-
-
-export default class Store{
-
 }

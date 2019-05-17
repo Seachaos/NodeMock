@@ -1,5 +1,5 @@
 {
-  "name": "NodeMockAPI",
+  "name": "node_mock_api",
   "version": "0.0.1",
   "private": true,
   "scripts": {
