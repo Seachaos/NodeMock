@@ -1,0 +1,13 @@
+{
+  "name": "NodeMockAPI",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "serve": "node start.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4"
+  }
+}
