@@ -1,9 +1,12 @@
-import http from 'http';
+import express from 'express';
+import bodyParser from 'body-parser';
 import resources from '../resources';
 
-const hostname = '127.0.0.1';
 const port = 8888;
 
+var app = express()
+
+const formParser = bodyParser.urlencoded({ extended: false });
 
 const enableCORS = (res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,10 +15,15 @@ const enableCORS = (res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
 }
 
-const server = http.createServer( (req, res) => {
+app.use(formParser);
+app.use( (req, res) => {
   const path = req.url.replace(/^\/+|\/+$/g, '');
   const {method} = req;
   console.log('receive request : ', `[${method}]`, path);
+
+  if (method=='POST') {
+    console.log('post receive :', JSON.stringify(req.body));
+  }
 
   // if resource available
   if (resources[path] && resources[path][method] ) {
@@ -39,6 +47,6 @@ const server = http.createServer( (req, res) => {
   }));
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+  console.log(`Server running at port: ${port}`);
 });
