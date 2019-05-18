@@ -9,6 +9,7 @@ const resources = {
     POST: save_to_file('users', (data, {req, res}) => {
       // do something like :
       // data.push({first_name: 'aa', last_name: 'bb'})
+      data.push(req.body)
       return [data, {status: 'OK', msg: 'nothing change'}];
     })
   },
