@@ -16,6 +16,7 @@ const enableCORS = (res) => {
 }
 
 app.use(formParser);
+app.use('/public', express.static('public'));
 app.use( (req, res) => {
   const path = req.url.replace(/^\/+|\/+$/g, '');
   const {method} = req;
